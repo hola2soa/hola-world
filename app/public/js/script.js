@@ -1,11 +1,9 @@
- $(window).load(function(){
-  $("#color_picker").ColorPickerSliders({
-      flat: true,
-      sliders: false,
-      previewontriggerelement: true,
-      invalidcolorsopacity: 0,
-      onchange: function(container, color) {
-        $("#color_picker_input").css("background-color", color.tiny.toRgbString());
-      }
-  });
+ $(window).load(function() {
+   var slider = new Slider("#price", {
+     tooltip: 'always',
+     range: true,
+     min: 0,
+     max: 10000,
+     value: [0, 700]
+   });
 });

@@ -1,0 +1,21 @@
+div class="login"
+  #login.modal.show
+    .modal-dialog
+      .modal-content
+        .modal-header
+          button.close aria-hidden="true" data-dismiss="modal" type="button"  &times;
+          h4.modal-title Login
+        .modal-body
+          form method="POST" action="/auth"
+            label Email Address
+            input type="text" name="email_address"
+            input type="Submit" name="submit" value="Login"
+        .modal-footer
+          strong To test try ted@gmail.com
+
+          javascript:
+            $(window).load(function() {
+              $('.header').addClass('blur-filter')
+              $('.left-pane').addClass('blur-filter')
+              $('.item-container').addClass('blur-filter')
+            })

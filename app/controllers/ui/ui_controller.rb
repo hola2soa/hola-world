@@ -2,14 +2,18 @@ module UI
 module Show
   def self.registered(app)
     app_get_show = lambda do
-    @item = params[:item]
-      if @item
-        logger.info 'redirected to get items'
-        redirect "/show/#{@item}"
-        return nil
+      if !authorized?
+        slim :login
+      else
+        @item = params[:item]
+        if @item
+          logger.info 'redirected to get items'
+          redirect "/show/#{@item}"
+          return nil
+        end
+        logger.info 'load show'
+        slim :main_pane
       end
-      logger.info 'load show'
-      slim :main_pane
     end
 
     app_get_show_item = lambda do
@@ -55,10 +59,17 @@ module Show
       end
     end
 
+    new_items = lambda do
+      request_url = get_api_url("")
+      options =  { headers: { 'Content-Type' => 'application/json' } }
+      @results = HTTParty.get(request_url, options)
+    end
+
     # routes
     app.get '/?', &app_get_show
     app.get ':item', &app_get_show
     app.get '/:item', &app_get_show_item
+    app.get '/new_items', &new_items
   end
 end
 end
