@@ -10,7 +10,7 @@ describe 'Shopping for items' do
       @headless = Headless.new
       @browser = Watir::Browser.new
     end
-    @browser.goto 'localhost:9393'
+    @browser.goto 'localhost:9292'
   end
 
   describe 'Go to home page' do
