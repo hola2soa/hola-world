@@ -2,7 +2,10 @@ div class="header"
   div class="title"
     h2 Hola!
   div class="search"
-    form method="get" action="/show"
-      input name="item" type="text" placeholder="Search" required="yes"
+    form id="search_form" method="get" action="/show/search"
+      span Price: 0
+      input name="price" id="price" type="text"
+      span 10000
+      input name="keyword" type="text" placeholder="Search" required="yes"
       span class="arrow"
-        input name="submit" type="submit" value="Search"
+        input type="submit" name="submit" value="Search"

@@ -47,6 +47,7 @@ body {
   background: url(/img/search.png) left no-repeat;
   background-size: 32px 32px;
   padding-left: 40px;
+  margin-left: 15px;
   color: #fff;
   font-weight: bold;
 }

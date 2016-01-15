@@ -1,16 +1,31 @@
--if @products
+-if !@products.empty?
   div
-   == column_chart @columnchartdata, library:{chartArea:{width:'100%'}}, id: 'progress', height: '300px', width: '100px'
-   table width="500px" class='center'
-    tbody
-     tr
-       th width="400px" Name
-       th Price
-     -@products.each do |product|
-       tr
-         td width="100px"
-          center
-           = product["title"]
-         td width='300'
-          center
-           = product["price"]
+   - if @columnchartdata
+     == column_chart @columnchartdata, library:{chartArea:{width:'100%'}}, id: 'progress', height: '300px', width: '100px'
+   div class="item-container"
+     ul class="multiple_columns"
+
+       - @products.each do |product|
+         li
+           div class="item-header"
+             div class="unpin"
+               p ....
+           div class="item-image"
+             img src="#{product["images"][0]}" width="265px" height="315"
+           div class="item-footer"
+             a href="#{product["link"]}" #{product["title"]} &nbsp;&nbsp;&nbsp;
+             span NTD. #{product["price"]}
+-elsif !@channel_id
+  strong No items found
+
+-if @channel_id
+  script src="#{@faye_url}/faye.js"
+  javascript:
+    var channel = "#{@channel_id}";
+    var url = "#{@faye_url}";
+
+    var client = new Faye.Client(url);
+
+    client.subscribe('/' + channel, function(message) {
+      console.log(message)
+    });

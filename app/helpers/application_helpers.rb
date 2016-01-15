@@ -21,6 +21,47 @@ module ApplicationHelpers
     halt 303        # http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
   end
 
+  def fetch_record(category, params)
+    redirect '/' unless authorized?
+
+    request_url = get_api_url("?category=#{category}&page_limit=1")
+    request_url << "&keyword=#{URI.encode(params["keyword"])}" if params["keyword"]
+
+    options =  { headers: { 'Content-Type' => 'application/json' } }
+    results = []
+    session[:stores].each do |store|
+      results << HTTParty.get(request_url + "&store=#{store}", options)
+    end
+    @products = results.flatten.compact
+    @columnchartdata = chart_data(@products)
+    slim :list_results
+  end
+
+  def chart_data(items)
+    count_0_300 =0
+    count_300_600 =0
+    count_600_900 =0
+    count_900_1200 =0
+    count_1200_up =0
+    #count number of items each range of price
+    items.each do |item|
+      if item["price"].to_i <300
+        count_0_300 = count_0_300 + 1
+      elsif item["price"].to_i <600
+        count_300_600 = count_300_600 + 1
+      elsif item["price"].to_i <900
+        count_600_900 = count_600_900 + 1
+      elsif item["price"].to_i <1200
+        count_900_1200 = count_900_1200 + 1
+      else
+        count_1200_up = count_1200_up + 1
+      end
+    end
+    # " "=>0 is used to adjust appearance
+    { "0~300"=>count_0_300,"300~600"=>count_300_600,"600~900"=>count_600_900,
+      "900~1200"=>count_900_1200,"1200 up"=>count_1200_up," "=>0 }
+  end
+
   def authorized?
     session[:authorized]
   end
@@ -42,6 +83,7 @@ module ApplicationHelpers
       error_send( '/', 'Invalid Credentials' ) unless result['authorized'] == true
       session[:authorized] = true
       session[:email_address] = result['user']['email_address']
+      session[:stores] = result['user']['stores']
       redirect '/show'
     else
       error_send( '/', 'Failed to authenticate' ) unless result['authorized'] == true

@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 require_relative 'spec_helper'
+require_relative './page_objects/login_page'
+
 require 'json'
 
 describe 'Shopping for items' do
@@ -8,21 +10,25 @@ describe 'Shopping for items' do
       @headless = Headless.new
       @browser = Watir::Browser.new
     end
-    @browser.goto 'localhost:9292'
+    @browser.goto 'localhost:9393'
   end
 
   describe 'Go to home page' do
-    it 'finds the title' do
-      @browser.title.must_equal 'Hola'
+    it 'tries to login' do
+      login = LoginPage.new(@browser)
+      login.login_with 'ted@gmail.com'
     end
   end
-  describe 'Searching for an item' do
-    it 'finds an item' do
-      @browser.text_field(name: 'item').set 's'
+
+=begin
+  describe 'Checks categories' do
+    it 'looks for the latest items' do
+      @browser.text_field(name: 'keyword').set 's'
       @browser.button(name: 'submit').click
       @browser.table(class: 'center').rows.count.must_be :>=, 30
     end
   end
+=end
 
   after do
     @browser.close

@@ -21,6 +21,7 @@ gem 'activesupport'
 gem 'slim'
 gem 'tilt'
 gem 'chartkick'
+gem 'page-object'
 
 group :development do
   gem 'tux'

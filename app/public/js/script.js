@@ -3,7 +3,17 @@
      tooltip: 'always',
      range: true,
      min: 0,
-     max: 10000,
-     value: [0, 700]
+     max: 1000,
+     value: [100, 700]
+   });
+
+   $( "#search_button" ).click(function() {
+     $( "#search_form" ).submit(function(event) {
+       event.preventDefault();
+       url = $(this).attr('action');
+       
+       var values = $(this).serialize();
+
+     });
    });
 });

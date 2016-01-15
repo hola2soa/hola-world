@@ -11,16 +11,18 @@ class SinatraApp < Sinatra::Base
   set :public_folder, File.expand_path('../app/public', __FILE__)
 
   configure do
-    set :api_ver, '/api/v1/'
+    set :api_ver, '/api/v1'
   end
 
   configure :production do
     set :api_server, 'https://wss-dynamo.herokuapp.com'
+    set :web_server, 'https://hola-web.herokuapp.com'
   end
 
   # Standard Sinatra configurations
-  configure :production, :development do
+  configure :development, :test do
     enable :logging
     set :api_server, 'http://localhost:9292'
+    set :web_server, 'http://localhost:9393'
   end
 end

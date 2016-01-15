@@ -69,3 +69,11 @@
 .modal-dialog {
     width: 270px;
 }
+
+.slider-track-low, .slider-track-high {
+	background: orange;
+}
+
+.slider-selection {
+	background: green;
+}
