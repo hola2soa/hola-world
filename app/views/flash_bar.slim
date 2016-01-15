@@ -1,6 +1,10 @@
 - if flash[:error]
-  div[class='flash error']
+  div id="error" class='error'
     = flash[:error]
+    javascript:
+      setTimeout(function() { $("#error").hide(); }, 3000);
 - if flash[:notice]
-  div[class='flash notice']
+  div id="notice" class='notice'
     = flash[:notice]
+    javascript:
+      setTimeout(function() { $("#notice").hide(); }, 3000);

@@ -39,9 +39,9 @@ module Query
     end
 
     delete_query = lambda do
-    request_url = get_api_url('queenshop/query/#{params[:id]}')
+    request_url = get_api_url('?id=#{params[:id]}')
     HTTParty.delete(request_url)
-    flash[:notice] = 'previos group search deleted'
+    flash[:notice] = 'previous group search deleted'
     redirect '/query'
   end
 

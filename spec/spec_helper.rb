@@ -5,6 +5,7 @@ require 'minitest/autorun'
 require 'rack/test'
 require 'watir-webdriver'
 require 'headless'
+require 'page-object'
 
 include Rack::Test::Methods
 
