@@ -86,7 +86,7 @@ module ApplicationHelpers
       session[:stores] = result['user']['stores']
       redirect '/show'
     else
-      error_send( '/', 'Failed to authenticate' ) unless result['authorized'] == true
+      error_send( '/', 'Failed to authenticate' )
     end
   end
 
