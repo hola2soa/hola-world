@@ -2,17 +2,5 @@
 
 Take a look: <a href="https://hola2soa-web.herokuapp.com/" target="_blank">live site</a>
 
-Handles:
-- GET   / redirects to /show
-  - /show
-    - displays the dashboard
-  - /show/\<item name\>
-    - searches for item and displays a list of items matching name with their respective price
-  - /query
-    - work in progress,
 
-TODO:
-  - pin/unpin items (sort of like bookmark)
-  - scrape using color of clothes
-  - display graph or some visualization
-  - change API to integrate the 3 APIs not only Queeshop
+This site serves as an interface to the <a href="https://wss-dynamo.herokuapp.com/" target="_blank">api</a>. The purpose of the site is to help women consolidate the "hunting" of items in one place. There are three websites, namely, <a href="http://www.queenshop.com/" target="_blank">Queenshop</a>, <a href="http://www.joyceshop.com/" target="_blank">Joyceshop</a>, and <a href="http://www.stylemooncat.com/" target="_blank">StyleMoonCat</a> that have similar features allowing women to shop online. The Api contains end points to gems that scrape these sites on user demand. Once the the information have been scraped the data is cached to improve response time on subsequent requests of the same query.
